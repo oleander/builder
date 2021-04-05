@@ -82,7 +82,6 @@ module HBuilder
     end
 
     # rubocop:disable Metrics/CyclomaticComplexity
-    # rubocop:disable Metrics/PerceivedComplexity
     # :reek:ManualDispatch,
     # :reek:TooManyStatements
     def method_missing(method, *args, &block)
@@ -96,14 +95,11 @@ module HBuilder
       raise Error if args.any? && block
 
       value = args.fetch(0) do
-        block ? new(&block) : Undefined
+        block ? new(&block) : (raise Error)
       end
-
-      raise Error if value == Undefined
 
       merge(method, value)
     end
-    # rubocop:enable Metrics/PerceivedComplexity
     # rubocop:enable Metrics/CyclomaticComplexity
 
     # :reek:UtilityFunction
