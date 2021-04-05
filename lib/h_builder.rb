@@ -120,4 +120,8 @@ module HBuilder
   def self.call(context = binding, &block)
     Abstract::Hash.call(context, &block)
   end
+
+  class << self
+    alias define call
+  end
 end
