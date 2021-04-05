@@ -82,6 +82,7 @@ module HBuilder
     end
 
     # rubocop:disable Metrics/CyclomaticComplexity
+    # rubocop:disable Metrics/PerceivedComplexity
     # :reek:ManualDispatch,
     # :reek:TooManyStatements
     def method_missing(method, *args, &block)
@@ -91,16 +92,18 @@ module HBuilder
         return receiver.public_send(method, *args, &block)
       end
 
-      value = Undefined.default(args.fetch(0, Undefined)) do
+      raise Error if args.count > 1
+      raise Error if args.any? && block
+
+      value = args.fetch(0) do
         block ? new(&block) : Undefined
       end
 
       raise Error if value == Undefined
-      raise Error if args.count > 1
-      raise Error if args.any? && block
 
       merge(method, value)
     end
+    # rubocop:enable Metrics/PerceivedComplexity
     # rubocop:enable Metrics/CyclomaticComplexity
 
     # :reek:UtilityFunction
@@ -109,7 +112,7 @@ module HBuilder
     end
 
     def respond_to_missing?(method, *)
-      !method.to_s.start_with?("__") || super
+      receiver.respond_to?(method, false) || !method.to_s.start_with?("__") || super
     end
 
     # :reek:UtilityFunction

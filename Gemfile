@@ -10,7 +10,6 @@ gem "rspec", "~> 3.0"
 
 gem "guard"
 gem "guard-rspec"
-gem "rubocop"
 gem "rubocop-rake"
 gem "rubocop-rspec"
 
