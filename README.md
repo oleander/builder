@@ -1,4 +1,4 @@
-# [![Builder](https://github.com/oleander/builder/actions/workflows/main.yml/badge.svg)](https://github.com/oleander/builder/actions/workflows/main.yml)
+# Builder [![Builder](https://github.com/oleander/builder/actions/workflows/main.yml/badge.svg)](https://github.com/oleander/builder/actions/workflows/main.yml)
 
 ## Example
 
